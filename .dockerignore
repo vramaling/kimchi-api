@@ -1,0 +1,15 @@
+# ignore git files
+.git
+.gitignore
+
+# ignore docker
+.docker
+
+# ignore python extras
+app/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+app/*/*/*/__pycache__/
+.env/
+.venv/
+venv/
