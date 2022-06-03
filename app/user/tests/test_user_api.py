@@ -13,9 +13,11 @@ CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
 ME_URL = reverse('user:me')
 
+
 def create_user(**params):
     """Create and return new user"""
     return get_user_model().objects.create_user(**params)
+
 
 class PublicUserApiTests(TestCase):
     """Tests for user API that are public features"""
@@ -77,6 +79,7 @@ class PublicUserApiTests(TestCase):
             'email': user_details['email'],
             'password': user_details['password'],
         }
+
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertIn('token', res.data)
@@ -85,7 +88,7 @@ class PublicUserApiTests(TestCase):
     def test_create_token_bad_creds(self):
         """Test returns error if creds are invalid"""
         create_user(email='test@example.com', password='goodpass')
-        payload = {'email': 'test@example.com', 'password':'wrong'}
+        payload = {'email': 'test@example.com', 'password': 'wrong'}
         res = self.client.post(TOKEN_URL, payload)
 
         self.assertNotIn('token', res.data)
@@ -103,6 +106,7 @@ class PublicUserApiTests(TestCase):
         res = self.client.get(ME_URL)
 
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
+
 
 class PrivateUserApiTests(TestCase):
     """Test API for auth required features"""
