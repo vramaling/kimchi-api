@@ -23,6 +23,7 @@ def detail_url(recipe_id):
     """Create and return a recipe detail URL"""
     return reverse('recipe:recipe-detail', args=[recipe_id])
 
+
 def create_recipe(user, **params):
     """Create and return sample recipe"""
     defaults = {
@@ -36,6 +37,7 @@ def create_recipe(user, **params):
 
     recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
+
 
 def create_user(**params):
     return get_user_model().objects.create_user(**params)
@@ -59,7 +61,10 @@ class PrivateRecipeAPITests(TestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.user = create_user(email='user@example.com', password='testpass123')
+        self.user = create_user(
+            email='user@example.com',
+            password='testpass123'
+        )
         self.client.force_authenticate(self.user)
 
     def test_retrieve_recipes(self):
@@ -77,7 +82,10 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_recipe_list_for_authenticated(self):
         """Test list of recipes is limited to auth user"""
-        other_user = create_user(email='second@example.com', password='password12345')
+        other_user = create_user(
+            email='second@example.com',
+            password='password12345'
+        )
         create_recipe(user=other_user)
         create_recipe(user=self.user)
 
@@ -111,7 +119,7 @@ class PrivateRecipeAPITests(TestCase):
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         recipe = Recipe.objects.get(id=res.data['id'])
 
-        for k,v in payload.items():
+        for k, v in payload.items():
             self.assertEqual(getattr(recipe, k), v)
 
         self.assertEqual(recipe.user, self.user)
@@ -157,7 +165,7 @@ class PrivateRecipeAPITests(TestCase):
 
         recipe.refresh_from_db()
 
-        for k,v in payload.items():
+        for k, v in payload.items():
             self.assertEqual(getattr(recipe, k), v)
 
         self.assertEqual(recipe.user, self.user)
