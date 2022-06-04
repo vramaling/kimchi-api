@@ -10,7 +10,7 @@ from recipe.serializers import IngredientSerializer
 INGREDIENTS_URL = reverse('recipe:ingredient-list')
 
 
-def create_user(email = 'user@example.com', password='pass12345'):
+def create_user(email='user@example.com', password='pass12345'):
     """Create and return user"""
     return get_user_model().objects.create_user(email=email, password=password)
 
@@ -52,7 +52,10 @@ class PrivateIngredientsAPITest(TestCase):
         """Test list ingred limited to authorized users"""
         user2 = create_user(email='testuser@example.com')
         Ingredient.objects.create(user=user2, name='Pepper')
-        ingredient = Ingredient.objects.create(user=self.user, name='Coriander')
+        ingredient = Ingredient.objects.create(
+            user=self.user,
+            name='Coriander'
+        )
 
         res = self.client.get(INGREDIENTS_URL)
 
