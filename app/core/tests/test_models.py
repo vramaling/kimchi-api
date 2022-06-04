@@ -63,4 +63,4 @@ class ModelTests(TestCase):
             description="Test recipe description.",
         )
 
-        self.assetEqual(str(recipe), recipe.title)
+        self.assertEqual(str(recipe), recipe.title)
