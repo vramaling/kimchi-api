@@ -321,7 +321,10 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_create_recipe_with_existing_ingredients(self):
         """Test creating recipe with existing ingredients"""
-        ingredient = Ingredient.objects.create(user=self.user, name='Cheddar Cheese')
+        ingredient = Ingredient.objects.create(
+            user=self.user,
+            name='Cheddar Cheese'
+        )
         payload = {
             'title': 'Cheeseburger',
             'time_minutes': 35,
@@ -415,7 +418,7 @@ class ImageUploadTest(TestCase):
         """Test uploading image to recipe"""
         url = image_upload_url(self.recipe.id)
         with tempfile.NamedTemporaryFile(suffix='.jpg') as image_file:
-            img = Image.new('RGB', (10,10))
+            img = Image.new('RGB', (10, 10))
             img.save(image_file, format='JPEG')
             image_file.seek(0)
             payload = {'image': image_file}
