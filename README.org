@@ -1,2 +1,8 @@
 * Kimchi Recipe API
 REST API with Docker
+
+** How to run
+1) Clone the repo
+2) run ~docker-compose build~
+3) run ~docker-compose up~
+4) Navigate to ~127.0.0.1:8002~
