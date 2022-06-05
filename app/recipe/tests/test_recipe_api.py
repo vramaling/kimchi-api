@@ -420,11 +420,26 @@ class PrivateRecipeAPITests(TestCase):
 
     def test_filter_by_ingredients(self):
         """Test filtering recipes by ingredients"""
-        recipe1 = create_recipe(user=self.user, title='Grilled Cheese Sandwich')
-        recipe2 = create_recipe(user=self.user, title='Fried Rice')
-        ingredient1 = Ingredient.objects.create(user=self.user, name='Cheddar Cheese')
-        ingredient2 = Ingredient.objects.create(user=self.user, name='Rice')
+        recipe1 = create_recipe(
+            user=self.user,
+            title='Grilled Cheese Sandwich'
+        )
+        recipe2 = create_recipe(
+            user=self.user,
+            title='Fried Rice'
+        )
+
+        ingredient1 = Ingredient.objects.create(
+            user=self.user,
+            name='Cheddar Cheese'
+        )
+        ingredient2 = Ingredient.objects.create(
+            user=self.user,
+            name='Rice'
+        )
+
         recipe1.ingredients.add(ingredient1)
+
         recipe2.ingredients.add(ingredient2)
         recipe3 = create_recipe(user=self.user, title='Spicy Lamb Curry')
 
