@@ -5,4 +5,4 @@ REST API with Docker
 1) Clone the repo
 2) run ~docker-compose build~
 3) run ~docker-compose up~
-4) Navigate to ~127.0.0.1:8002~
+4) Navigate to ~127.0.0.1:8002/api/docs~
